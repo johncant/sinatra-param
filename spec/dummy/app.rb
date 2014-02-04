@@ -11,160 +11,308 @@ class App < Sinatra::Base
   end
 
   get '/' do
-    param :a, String
-    param :b, String, required: true
-    param :c, String, default: 'test'
-    param :d, String
-
+    begin
+      param :a, String
+      param :b, String, required: true
+      param :c, String, default: 'test'
+      param :d, String
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
     params.to_json
   end
 
   get '/keys/stringify' do
-    param :q, String, transform: :upcase
+    begin
+      param :q, String, transform: :upcase
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
 
     params['q']
   end
 
   get '/coerce/string' do
     params['arg'] = params['arg'].to_i
-    param :arg, String
+    begin
+      param :arg, String
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/coerce/integer' do
-    param :arg, Integer
+    begin
+      param :arg, Integer
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/coerce/float' do
-    param :arg, Float
+    begin
+      param :arg, Float
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/coerce/time' do
-    param :arg, Time
+    begin
+      param :arg, Time
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/coerce/date' do
-    param :arg, Date
+    begin
+      param :arg, Date
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/coerce/datetime' do
-    param :arg, DateTime
+    begin
+      param :arg, DateTime
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/coerce/array' do
-    param :arg, Array
+    begin
+      param :arg, Array
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/coerce/hash' do
-    param :arg, Hash
+    begin
+      param :arg, Hash
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/coerce/boolean' do
-    param :arg, Boolean
+    begin
+      param :arg, Boolean
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/default' do
-    param :sort, String, default: "title"
+    begin
+      param :sort, String, default: "title"
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/default/boolean/true' do
-    param :arg, Boolean, default: true
+    begin
+      param :arg, Boolean, default: true
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/default/boolean/false' do
-    param :arg, Boolean, default: false
+    begin
+      param :arg, Boolean, default: false
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/transform' do
-    param :order, String, transform: :upcase
+    begin
+      param :order, String, transform: :upcase
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/validation/required' do
-    param :arg, String, required: true
+    begin
+      param :arg, String, required: true
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/validation/blank/string' do
-    param :arg, String, blank: false
+    begin
+      param :arg, String, blank: false
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
   end
 
   get '/validation/blank/array' do
-    param :arg, Array, blank: false
+    begin
+      param :arg, Array, blank: false
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
   end
 
   get '/validation/blank/hash' do
-    param :arg, Hash, blank: false
+    begin
+      param :arg, Hash, blank: false
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
   end
 
   get '/validation/blank/other' do
-    param :arg, Class, blank: false
+    begin
+      param :arg, Class, blank: false
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
   end
 
   get '/validation/nonblank/string' do
-    param :arg, String, blank: true
+    begin
+      param :arg, String, blank: true
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
   end
 
   get '/validation/is' do
-    param :arg, String, is: 'foo'
+    begin
+      param :arg, String, is: 'foo'
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/validation/in' do
-    param :arg, String, in: ['ASC', 'DESC']
+    begin
+      param :arg, String, in: ['ASC', 'DESC']
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/validation/within' do
-    param :arg, Integer, within: 1..10
+    begin
+      param :arg, Integer, within: 1..10
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/validation/range' do
-    param :arg, Integer, range: 1..10
+    begin
+      param :arg, Integer, range: 1..10
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/validation/min' do
-    param :arg, Integer, min: 12
+    begin
+      param :arg, Integer, min: 12
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/validation/max' do
-    param :arg, Integer, max: 20
+    begin
+      param :arg, Integer, max: 20
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/validation/min_length' do
-    param :arg, String, min_length: 5
+    begin
+      param :arg, String, min_length: 5
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/validation/max_length' do
-    param :arg, String, max_length: 10
+    begin
+      param :arg, String, max_length: 10
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
+
     params.to_json
   end
 
   get '/choice' do
-    param :a, String
-    param :b, String
-    param :c, String
+    begin
+      param :a, String
+      param :b, String
+      param :c, String
 
-    one_of(:a, :b, :c)
+      one_of(:a, :b, :c)
+    rescue InvalidParameterError => e
+      halt(400, {:message => e.message}.to_json)
+    end
 
     {
       message: 'OK'
     }.to_json
   end
 end
+
+#App.run!(:port => 6555)

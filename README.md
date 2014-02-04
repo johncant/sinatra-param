@@ -74,6 +74,13 @@ Mattt Thompson
 - http://twitter.com/mattt
 - m@mattt.me
 
+# TODO
+(johncant here)
+I really like the concise DSL used in this gem by mattt. I need to
+return a 422 and more specific errors. Also, I would like to decouple
+it from Sinatra so I can use it everywhere, which also means ripping
+the tests apart.
+
 ## License
 
 sinatra-param is available under the MIT license. See the LICENSE file for more info.

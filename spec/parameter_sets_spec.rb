@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Parameter Sets' do
   describe 'one_of' do
-    it 'returns 400 on requests that contain more than one mutually exclusive parameter' do
+    it 'raises InvalidParameterError on requests that contain more than one mutually exclusive parameter' do
       params = [
         {a: 1, b: 2},
         {b: 2, c: 3},
